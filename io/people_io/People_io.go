@@ -1,17 +1,16 @@
-package collection_io
+package people_io
 
 import (
 	"errors"
 	"ostmfe/api"
-	"ostmfe/domain/collection"
+	"ostmfe/domain/people"
 )
 
-const collectionImg = api.BASE_URL + "collectionImg"
+const pple = api.BASE_URL + "pple"
 
-func CreateCollectionImg(image collection.Collection_image) (collection.Collection_image, error) {
-
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().SetBody(image).Post(collectionImg + "create")
+func CreatePeople(P people.People) (people.People, error) {
+	entity := people.People{}
+	resp, _ := api.Rest().SetBody(P).Post(pple + "create")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -21,23 +20,9 @@ func CreateCollectionImg(image collection.Collection_image) (collection.Collecti
 	}
 	return entity, nil
 }
-func UpdateCollectionImg(image collection.Collection_image) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().SetBody(image).Post(collectionImg + "update")
-	if resp.IsError() {
-		return entity, errors.New(resp.Status())
-	}
-	err := api.JSON.Unmarshal(resp.Body(), &entity)
-
-	if err != nil {
-		return entity, errors.New(resp.Status())
-	}
-	return entity, nil
-
-}
-func ReadCollectionImg(id string) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "read?id=" + id)
+func UpdatePeople(P people.People) (people.People, error) {
+	entity := people.People{}
+	resp, _ := api.Rest().SetBody(P).Post(pple + "update")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -47,9 +32,9 @@ func ReadCollectionImg(id string) (collection.Collection_image, error) {
 	}
 	return entity, nil
 }
-func DeleteCollectionImg(id string) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "delete?id=" + id)
+func ReadPeople(id string) (people.People, error) {
+	entity := people.People{}
+	resp, _ := api.Rest().Get(pple + "Read?id" + id)
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -58,11 +43,22 @@ func DeleteCollectionImg(id string) (collection.Collection_image, error) {
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
-
 }
-func ReadCollectionImgs() (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "reads")
+func DeletePeople(id string) (people.People, error) {
+	entity := people.People{}
+	resp, _ := api.Rest().Get(pple + "delete?id" + id)
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+}
+func ReadPeoples() (people.People, error) {
+	entity := people.People{}
+	resp, _ := api.Rest().Get(pple + "Reads")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}

@@ -1,17 +1,16 @@
-package collection_io
+package event_io
 
 import (
 	"errors"
 	"ostmfe/api"
-	"ostmfe/domain/collection"
+	"ostmfe/domain/project"
 )
 
-const collectionImg = api.BASE_URL + "collectionImg"
+const eventPrj = api.BASE_URL + "eventPrj"
 
-func CreateCollectionImg(image collection.Collection_image) (collection.Collection_image, error) {
-
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().SetBody(image).Post(collectionImg + "create")
+func CreateEventProject(prj project.Project) (project.Project, error) {
+	entity := project.Project{}
+	resp, _ := api.Rest().SetBody(prj).Post(eventPrj + "create")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -21,23 +20,9 @@ func CreateCollectionImg(image collection.Collection_image) (collection.Collecti
 	}
 	return entity, nil
 }
-func UpdateCollectionImg(image collection.Collection_image) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().SetBody(image).Post(collectionImg + "update")
-	if resp.IsError() {
-		return entity, errors.New(resp.Status())
-	}
-	err := api.JSON.Unmarshal(resp.Body(), &entity)
-
-	if err != nil {
-		return entity, errors.New(resp.Status())
-	}
-	return entity, nil
-
-}
-func ReadCollectionImg(id string) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "read?id=" + id)
+func UpdateEventProject(prj project.Project) (project.Project, error) {
+	entity := project.Project{}
+	resp, _ := api.Rest().SetBody(prj).Post(eventPrj + "update")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -47,9 +32,9 @@ func ReadCollectionImg(id string) (collection.Collection_image, error) {
 	}
 	return entity, nil
 }
-func DeleteCollectionImg(id string) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "delete?id=" + id)
+func ReadEventProject(id string) (project.Project, error) {
+	entity := project.Project{}
+	resp, _ := api.Rest().Get(eventPrj + "read?id" + id)
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -58,11 +43,22 @@ func DeleteCollectionImg(id string) (collection.Collection_image, error) {
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
-
 }
-func ReadCollectionImgs() (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "reads")
+func DeleteEventProject(id string) (project.Project, error) {
+	entity := project.Project{}
+	resp, _ := api.Rest().Get(eventPrj + "delete?id" + id)
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+}
+func ReadEventProjects() (project.Project, error) {
+	entity := project.Project{}
+	resp, _ := api.Rest().Get(eventPrj + "reads")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}

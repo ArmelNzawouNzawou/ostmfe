@@ -1,17 +1,17 @@
-package booking_io
+package image_io
 
 import (
 	"errors"
 	"ostmfe/api"
-	"ostmfe/domain/booking"
+	"ostmfe/domain/image"
 )
 
-const bookingtransport = api.BASE_URL + "bookingtransport"
+const imG = api.BASE_URL + "imG"
 
-func CreateBookingTransport(transport booking.BookingTransport) (booking.BookingTransport, error) {
-	entity := booking.BookingTransport{}
-	resp, _ := api.Rest().SetBody(transport).Post(bookingtransport + "create")
+func CreateImage(img image.Images) (image.Images, error) {
 
+	entity := image.Images{}
+	resp, _ := api.Rest().SetBody(img).Post(imG + "create")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -20,11 +20,12 @@ func CreateBookingTransport(transport booking.BookingTransport) (booking.Booking
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
+
 }
-func UpdateBookingTransport(transport booking.BookingTransport) (booking.BookingTransport, error) {
-	entity := booking.BookingTransport{}
-	resp, _ := api.Rest().SetBody(transport).Post(bookingtransport + "update")
+func updateImage(img image.Images) (image.Images, error) {
 
+	entity := image.Images{}
+	resp, _ := api.Rest().SetBody(img).Post(imG + "update")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -33,11 +34,12 @@ func UpdateBookingTransport(transport booking.BookingTransport) (booking.Booking
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
+
 }
-func ReadBookingTransport(id string) (booking.BookingTransport, error) {
-	entity := booking.BookingTransport{}
-	resp, _ := api.Rest().Get(bookingtransport + "read?id=" + id)
+func ReadImage(id string) (image.Images, error) {
 
+	entity := image.Images{}
+	resp, _ := api.Rest().Get(imG + "read?id" + id)
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -46,11 +48,12 @@ func ReadBookingTransport(id string) (booking.BookingTransport, error) {
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
+
 }
-func DeleteBookingTransport(id string) (booking.BookingTransport, error) {
-	entity := booking.BookingTransport{}
-	resp, _ := api.Rest().Get(bookingtransport + "delete?id=" + id)
+func DeleteImage(id string) (image.Images, error) {
 
+	entity := image.Images{}
+	resp, _ := api.Rest().Get(imG + "delete?id" + id)
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -59,11 +62,12 @@ func DeleteBookingTransport(id string) (booking.BookingTransport, error) {
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
+
 }
-func ReadBookingTransports() (booking.BookingTransport, error) {
-	entity := booking.BookingTransport{}
-	resp, _ := api.Rest().Get(bookingtransport + "reads")
+func ReadImages() (image.Images, error) {
 
+	entity := image.Images{}
+	resp, _ := api.Rest().Get(imG + "reads")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -72,4 +76,5 @@ func ReadBookingTransports() (booking.BookingTransport, error) {
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
+
 }

@@ -1,55 +1,16 @@
-package collection_io
+package people_io
 
 import (
 	"errors"
 	"ostmfe/api"
-	"ostmfe/domain/collection"
+	"ostmfe/domain/people"
 )
 
-const collectionImg = api.BASE_URL + "collectionImg"
+const pplPlace = api.BASE_URL + "pplePlace"
 
-func CreateCollectionImg(image collection.Collection_image) (collection.Collection_image, error) {
-
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().SetBody(image).Post(collectionImg + "create")
-	if resp.IsError() {
-		return entity, errors.New(resp.Status())
-	}
-	err := api.JSON.Unmarshal(resp.Body(), &entity)
-	if err != nil {
-		return entity, errors.New(resp.Status())
-	}
-	return entity, nil
-}
-func UpdateCollectionImg(image collection.Collection_image) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().SetBody(image).Post(collectionImg + "update")
-	if resp.IsError() {
-		return entity, errors.New(resp.Status())
-	}
-	err := api.JSON.Unmarshal(resp.Body(), &entity)
-
-	if err != nil {
-		return entity, errors.New(resp.Status())
-	}
-	return entity, nil
-
-}
-func ReadCollectionImg(id string) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "read?id=" + id)
-	if resp.IsError() {
-		return entity, errors.New(resp.Status())
-	}
-	err := api.JSON.Unmarshal(resp.Body(), &entity)
-	if err != nil {
-		return entity, errors.New(resp.Status())
-	}
-	return entity, nil
-}
-func DeleteCollectionImg(id string) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "delete?id=" + id)
+func CreatePeoplePlace(pPl people.PeoplePlace) (people.PeoplePlace, error) {
+	entity := people.PeoplePlace{}
+	resp, _ := api.Rest().SetBody(pPl).Post(pplPlace + "create")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -60,9 +21,9 @@ func DeleteCollectionImg(id string) (collection.Collection_image, error) {
 	return entity, nil
 
 }
-func ReadCollectionImgs() (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "reads")
+func UpdatePeoplePlace(pPl people.PeoplePlace) (people.PeoplePlace, error) {
+	entity := people.PeoplePlace{}
+	resp, _ := api.Rest().SetBody(pPl).Post(pplPlace + "update")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -71,4 +32,44 @@ func ReadCollectionImgs() (collection.Collection_image, error) {
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
+
+}
+func ReadPeoplePlace(id string) (people.PeoplePlace, error) {
+	entity := people.PeoplePlace{}
+	resp, _ := api.Rest().Get(pplPlace + "read?id" + id)
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+
+}
+func DeletePeoplePlace(id string) (people.PeoplePlace, error) {
+	entity := people.PeoplePlace{}
+	resp, _ := api.Rest().Get(pplPlace + "delete?id" + id)
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+
+}
+func ReadPeoplePlaces() (people.PeoplePlace, error) {
+	entity := people.PeoplePlace{}
+	resp, _ := api.Rest().Get(pplPlace + "reads")
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+
 }

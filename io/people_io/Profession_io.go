@@ -1,17 +1,17 @@
-package booking_io
+package people_io
 
 import (
 	"errors"
 	"ostmfe/api"
-	"ostmfe/domain/booking"
+	"ostmfe/domain/people"
 )
 
-const bookingtransport = api.BASE_URL + "bookingtransport"
+const prof = api.BASE_URL + "prof"
 
-func CreateBookingTransport(transport booking.BookingTransport) (booking.BookingTransport, error) {
-	entity := booking.BookingTransport{}
-	resp, _ := api.Rest().SetBody(transport).Post(bookingtransport + "create")
+func CreateProfession(prf people.Profession) (people.Profession, error) {
 
+	entity := people.Profession{}
+	resp, _ := api.Rest().SetBody(prf).Post(prof + "create")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -20,11 +20,12 @@ func CreateBookingTransport(transport booking.BookingTransport) (booking.Booking
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
+
 }
-func UpdateBookingTransport(transport booking.BookingTransport) (booking.BookingTransport, error) {
-	entity := booking.BookingTransport{}
-	resp, _ := api.Rest().SetBody(transport).Post(bookingtransport + "update")
+func UpdateProfession(prf people.Profession) (people.Profession, error) {
 
+	entity := people.Profession{}
+	resp, _ := api.Rest().SetBody(prf).Post(prof + "update")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -33,11 +34,12 @@ func UpdateBookingTransport(transport booking.BookingTransport) (booking.Booking
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
+
 }
-func ReadBookingTransport(id string) (booking.BookingTransport, error) {
-	entity := booking.BookingTransport{}
-	resp, _ := api.Rest().Get(bookingtransport + "read?id=" + id)
+func ReadProfession(id string) (people.Profession, error) {
 
+	entity := people.Profession{}
+	resp, _ := api.Rest().Get(prof + "read?id" + id)
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -46,11 +48,12 @@ func ReadBookingTransport(id string) (booking.BookingTransport, error) {
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
+
 }
-func DeleteBookingTransport(id string) (booking.BookingTransport, error) {
-	entity := booking.BookingTransport{}
-	resp, _ := api.Rest().Get(bookingtransport + "delete?id=" + id)
+func DeleteProfession(id string) (people.Profession, error) {
 
+	entity := people.Profession{}
+	resp, _ := api.Rest().Get(prof + "delete?id" + id)
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -59,11 +62,12 @@ func DeleteBookingTransport(id string) (booking.BookingTransport, error) {
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
+
 }
-func ReadBookingTransports() (booking.BookingTransport, error) {
-	entity := booking.BookingTransport{}
-	resp, _ := api.Rest().Get(bookingtransport + "reads")
+func ReadProfessions() (people.Profession, error) {
 
+	entity := people.Profession{}
+	resp, _ := api.Rest().Get(prof + "reads")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -72,4 +76,5 @@ func ReadBookingTransports() (booking.BookingTransport, error) {
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
+
 }

@@ -1,4 +1,4 @@
-package menber
+package member
 
 type Member struct {
 	Id        string `json:"id"`

@@ -1,55 +1,16 @@
-package collection_io
+package history_io
 
 import (
 	"errors"
 	"ostmfe/api"
-	"ostmfe/domain/collection"
+	"ostmfe/domain/history"
 )
 
-const collectionImg = api.BASE_URL + "collectionImg"
+const historyImg = api.BASE_URL + "historyImg"
 
-func CreateCollectionImg(image collection.Collection_image) (collection.Collection_image, error) {
-
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().SetBody(image).Post(collectionImg + "create")
-	if resp.IsError() {
-		return entity, errors.New(resp.Status())
-	}
-	err := api.JSON.Unmarshal(resp.Body(), &entity)
-	if err != nil {
-		return entity, errors.New(resp.Status())
-	}
-	return entity, nil
-}
-func UpdateCollectionImg(image collection.Collection_image) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().SetBody(image).Post(collectionImg + "update")
-	if resp.IsError() {
-		return entity, errors.New(resp.Status())
-	}
-	err := api.JSON.Unmarshal(resp.Body(), &entity)
-
-	if err != nil {
-		return entity, errors.New(resp.Status())
-	}
-	return entity, nil
-
-}
-func ReadCollectionImg(id string) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "read?id=" + id)
-	if resp.IsError() {
-		return entity, errors.New(resp.Status())
-	}
-	err := api.JSON.Unmarshal(resp.Body(), &entity)
-	if err != nil {
-		return entity, errors.New(resp.Status())
-	}
-	return entity, nil
-}
-func DeleteCollectionImg(id string) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "delete?id=" + id)
+func CreateHistoryImage(hist history.History_image) (history.History_image, error) {
+	entity := history.History_image{}
+	resp, _ := api.Rest().SetBody(hist).Post(historyImg + "create")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -60,9 +21,9 @@ func DeleteCollectionImg(id string) (collection.Collection_image, error) {
 	return entity, nil
 
 }
-func ReadCollectionImgs() (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "reads")
+func UpdateHistoryImage(hist history.History_image) (history.History_image, error) {
+	entity := history.History_image{}
+	resp, _ := api.Rest().SetBody(hist).Post(historyImg + "update")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -71,4 +32,44 @@ func ReadCollectionImgs() (collection.Collection_image, error) {
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
+
+}
+func ReadHistoryImage(id string) (history.History_image, error) {
+	entity := history.History_image{}
+	resp, _ := api.Rest().Get(historyImg + "read?id" + id)
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+
+}
+func DeleteHistoryImage(id string) (history.History_image, error) {
+	entity := history.History_image{}
+	resp, _ := api.Rest().Get(historyImg + "delete?id" + id)
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+
+}
+func ReadHistoryImages() (history.History_image, error) {
+	entity := history.History_image{}
+	resp, _ := api.Rest().Get(historyImg + "reads")
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+
 }

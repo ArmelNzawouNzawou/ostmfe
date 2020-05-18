@@ -1,55 +1,16 @@
-package collection_io
+package language_io
 
 import (
 	"errors"
 	"ostmfe/api"
-	"ostmfe/domain/collection"
+	"ostmfe/domain/language"
 )
 
-const collectionImg = api.BASE_URL + "collectionImg"
+const lang = api.BASE_URL + "lang"
 
-func CreateCollectionImg(image collection.Collection_image) (collection.Collection_image, error) {
-
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().SetBody(image).Post(collectionImg + "create")
-	if resp.IsError() {
-		return entity, errors.New(resp.Status())
-	}
-	err := api.JSON.Unmarshal(resp.Body(), &entity)
-	if err != nil {
-		return entity, errors.New(resp.Status())
-	}
-	return entity, nil
-}
-func UpdateCollectionImg(image collection.Collection_image) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().SetBody(image).Post(collectionImg + "update")
-	if resp.IsError() {
-		return entity, errors.New(resp.Status())
-	}
-	err := api.JSON.Unmarshal(resp.Body(), &entity)
-
-	if err != nil {
-		return entity, errors.New(resp.Status())
-	}
-	return entity, nil
-
-}
-func ReadCollectionImg(id string) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "read?id=" + id)
-	if resp.IsError() {
-		return entity, errors.New(resp.Status())
-	}
-	err := api.JSON.Unmarshal(resp.Body(), &entity)
-	if err != nil {
-		return entity, errors.New(resp.Status())
-	}
-	return entity, nil
-}
-func DeleteCollectionImg(id string) (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "delete?id=" + id)
+func CreateLanguage(L language.Language) (language.Language, error) {
+	entity := language.Language{}
+	resp, _ := api.Rest().SetBody(L).Post(lang + "create")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -60,9 +21,9 @@ func DeleteCollectionImg(id string) (collection.Collection_image, error) {
 	return entity, nil
 
 }
-func ReadCollectionImgs() (collection.Collection_image, error) {
-	entity := collection.Collection_image{}
-	resp, _ := api.Rest().Get(collectionImg + "reads")
+func UpdateLanguage(L language.Language) (language.Language, error) {
+	entity := language.Language{}
+	resp, _ := api.Rest().SetBody(L).Post(lang + "update")
 	if resp.IsError() {
 		return entity, errors.New(resp.Status())
 	}
@@ -71,4 +32,44 @@ func ReadCollectionImgs() (collection.Collection_image, error) {
 		return entity, errors.New(resp.Status())
 	}
 	return entity, nil
+
+}
+func ReadLanguage(id string) (language.Language, error) {
+	entity := language.Language{}
+	resp, _ := api.Rest().Get(lang + "read?id" + id)
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+
+}
+func DeleteLanguage(id string) (language.Language, error) {
+	entity := language.Language{}
+	resp, _ := api.Rest().Get(lang + "delete?id" + id)
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+
+}
+func ReadLanguages() (language.Language, error) {
+	entity := language.Language{}
+	resp, _ := api.Rest().Get(lang + "reads")
+	if resp.IsError() {
+		return entity, errors.New(resp.Status())
+	}
+	err := api.JSON.Unmarshal(resp.Body(), &entity)
+	if err != nil {
+		return entity, errors.New(resp.Status())
+	}
+	return entity, nil
+
 }
